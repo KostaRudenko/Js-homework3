@@ -1,5 +1,5 @@
-//'use strict';
-globalScopeCheck('Chat', Chat);
+'use strict';
+//globalScopeCheck('Chat', Chat);
 
 User.users = [];
 Chat.chats = [];
@@ -68,12 +68,12 @@ Chat.prototype = {
     }
 };
 
-function ChatMessage(user, message) {
-    if (!user || !message) {
+function ChatMessage(user, messageText) {
+    if (!user || !messageText) {
         throw new Error('user or message missing');
     }
     this.user = user;
-    this.messageText = message;
+    this.messageText = messageText;
 }
 
 function User(userName) {
@@ -105,24 +105,21 @@ User.prototype = {
         } else {
             chat.removeUser(this);
         }
+    },
+    sendNewMessage: function (chat, message) {
+
     }
 };
 
 function globalScopeCheck(propName, value) {
     if (window.hasOwnProperty(propName)) {
-        //throw new Error(propName + ' Already exist');
-        console.error(propName + ' Already exist');
+        throw new Error(propName + ' Already exist');
     }
     Object.defineProperty(window, propName, {
         value: value,
-        writable: false,
-        configurable: false
+        writable: false
     });
 }
-
-//window.Chat = 'Lol';
-
-
 
 let defaultChat = new Chat('default');
 let chat1 = new Chat('chat1');
@@ -134,25 +131,44 @@ let user2 = new User('Andrew');
 let user3 = new User('Olly');
 let user4 = new User('Bogdan');
 
-chat1.addUser(user1, user2, user3, user4);
-chat1.sendMessage(user1, 'hello1');
-chat1.sendMessage(user2, 'hi2');
-chat1.sendMessage(user1, 'hello3');
-chat1.sendMessage(user2, 'hi4');
-chat1.sendMessage(user1, 'hello5');
-chat1.sendMessage(user2, 'hi6');
-chat1.sendMessage(user1, 'hello7');
-chat1.sendMessage(user2, 'hi8');
-chat1.sendMessage(user1, 'hello9');
-chat1.sendMessage(user2, 'hi10');
-chat1.sendMessage(user1, 'hello11');
-chat1.sendMessage(user2, 'hi12');
-console.log(chat1);
-chat1.showMessageHistory(2);
+// chat1.addUser(user1, user2, user3, user4);
+// chat1.sendMessage(user1, 'hello1');
+// chat1.sendMessage(user2, 'hi2');
+// chat1.sendMessage(user1, 'hello3');
+// chat1.sendMessage(user2, 'hi4');
+// chat1.sendMessage(user1, 'hello5');
+// chat1.sendMessage(user2, 'hi6');
+// chat1.sendMessage(user1, 'hello7');
+// chat1.sendMessage(user2, 'hi8');
+// chat1.sendMessage(user1, 'hello9');
+// chat1.sendMessage(user2, 'hi10');
+// chat1.sendMessage(user1, 'hello11');
+// chat1.sendMessage(user2, 'hi12');
+// chat1.showMessageHistory();
+// chat1.showMessageHistory(2,2);
+// user1.leaveChat(chat1);
+// console.log(chat1);
+
+// chat2.addUser(user3, user1);
+// chat2.sendMessage(user3, 'sup');
+// chat2.sendMessage(user1, 'hi olly');
+// chat2.sendMessage(user1, 'how are you?');
+// chat2.sendMessage(user3, 'fine..thanks and u?');
+// chat2.sendMessage(user1, 'i`m ok ty');
+// chat2.showMessageHistory(2);
+// chat2.removeUser(user1);
+// console.log(chat2);
+
+// user1.joinChat();
+// user2.joinChat();
+// user2.leaveChat();
+// console.log(defaultChat);
+
+chat3.addUser(user3, user4);
+console.log(chat3);
+user3.sendNewMessage(chat3, 'atatat');
 
 
-chat2.addUser(user3, user1);
-chat2.sendMessage(user3, 'sup');
-//console.log(chat2);
+
 
 
