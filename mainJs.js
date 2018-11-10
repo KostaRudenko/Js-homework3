@@ -109,7 +109,7 @@ User.prototype = {
     sendNewMessage: function (chat, message) {
         if (arguments.length === 1){
             message = arguments[0];
-            defaultChat.messageHistory.push(message);
+            defaultChat.messageHistory.push(message); // 50/50
         } else {
             chat.sendMessage(this, message);
         }
