@@ -62,7 +62,7 @@ Chat.prototype = {
             historyCount = 10;
         }
         for (let i = historyIndex; i < historyCount; i++) {
-            console.log(this.messageHistory[i])
+            console.log(this.messageHistory[i]) // not finished
         }
         return this.messageHistory
     }
@@ -107,7 +107,12 @@ User.prototype = {
         }
     },
     sendNewMessage: function (chat, message) {
-
+        if (arguments.length === 1){
+            message = arguments[0];
+            defaultChat.messageHistory.push(message);
+        } else {
+            chat.sendMessage(this, message);
+        }
     }
 };
 
@@ -159,14 +164,16 @@ let user4 = new User('Bogdan');
 // chat2.removeUser(user1);
 // console.log(chat2);
 
-// user1.joinChat();
-// user2.joinChat();
-// user2.leaveChat();
-// console.log(defaultChat);
+user1.joinChat();
+user2.joinChat();
+user2.leaveChat();
+console.log(defaultChat);
 
 chat3.addUser(user3, user4);
+chat3.sendMessage(user3, 'bobo');
+user3.sendNewMessage(chat3, 'baba');
 console.log(chat3);
-user3.sendNewMessage(chat3, 'atatat');
+user3.sendNewMessage('atatat');
 
 
 
