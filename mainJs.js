@@ -16,6 +16,12 @@ function Chat(chatName) {
 }
 
 Chat.prototype = {
+    formattedData: function () {
+        this.date = new Date();
+        let localTime = this.date.toLocaleTimeString();
+        let milliseconds = this.date.getMilliseconds();
+        return localTime + ':' + milliseconds;
+    },
     addUser: function () {
         for (let i = 0; i < arguments.length; i++) {
             let user = arguments[i];
@@ -43,9 +49,10 @@ Chat.prototype = {
     checkConnecting: function (user) {
         for (let i = 0; i < this.users.length; i++) {
             if (this.users[i] === user) {
-                return true
+                return 'online'
             }
         }
+        return 'offline'
     },
     showMessageHistory: function (index, count) {
         let historyIndex = index;
@@ -62,7 +69,7 @@ Chat.prototype = {
             historyCount = 10;
         }
         for (let i = historyIndex; i < historyCount; i++) {
-            console.log(this.messageHistory[i]) // not finished
+             console.log('user name: ' + '[' + this.messageHistory[i].user.userName + '] ' + '\nconnection: ' + this.checkConnecting(this.messageHistory[i].user) + '\nmessage: ' + this.messageHistory[i].messageText + '\ntime: ' + '[' + this.formattedData() + ']');
         }
         return this.messageHistory
     }
@@ -81,7 +88,6 @@ function User(userName) {
         throw new Error('Enter your name');
     }
     this.userName = userName;
-
     User.users.push(this);
 }
 
@@ -107,7 +113,7 @@ User.prototype = {
         }
     },
     sendNewMessage: function (chat, message) {
-        if (arguments.length === 1){
+        if (arguments.length === 1) {
             message = arguments[0];
             message = new ChatMessage(this, message);
             defaultChat.messageHistory.push(message);
@@ -137,23 +143,23 @@ let user2 = new User('Andrew');
 let user3 = new User('Olly');
 let user4 = new User('Bogdan');
 
-// chat1.addUser(user1, user2, user3, user4);
-// chat1.sendMessage(user1, 'hello1');
-// chat1.sendMessage(user2, 'hi2');
-// chat1.sendMessage(user1, 'hello3');
-// chat1.sendMessage(user2, 'hi4');
-// chat1.sendMessage(user1, 'hello5');
-// chat1.sendMessage(user2, 'hi6');
-// chat1.sendMessage(user1, 'hello7');
-// chat1.sendMessage(user2, 'hi8');
+chat1.addUser(user1, user2, user3, user4);
+chat1.sendMessage(user1, 'hello1');
+chat1.sendMessage(user2, 'hi2');
+chat1.sendMessage(user3, 'hello3');
+chat1.sendMessage(user4, 'hi4');
+chat1.sendMessage(user1, 'hello5');
+chat1.sendMessage(user2, 'hi6');
+chat1.sendMessage(user1, 'hello7');
+chat1.sendMessage(user2, 'hi8');
 // chat1.sendMessage(user1, 'hello9');
 // chat1.sendMessage(user2, 'hi10');
+//user1.leaveChat(chat1);
 // chat1.sendMessage(user1, 'hello11');
 // chat1.sendMessage(user2, 'hi12');
-// chat1.showMessageHistory();
-// chat1.showMessageHistory(2,2);
-// user1.leaveChat(chat1);
-// console.log(chat1);
+chat1.showMessageHistory();
+//chat1.showMessageHistory(2,4);
+//console.log(chat1);
 
 // chat2.addUser(user3, user1);
 // chat2.sendMessage(user3, 'sup');
