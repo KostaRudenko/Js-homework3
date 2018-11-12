@@ -69,7 +69,9 @@ Chat.prototype = {
             historyCount = 10;
         }
         for (let i = historyIndex; i < historyCount; i++) {
-             console.log('user name: ' + '[' + this.messageHistory[i].user.userName + '] ' + '\nconnection: ' + this.checkConnecting(this.messageHistory[i].user) + '\nmessage: ' + this.messageHistory[i].messageText + '\ntime: ' + '[' + this.formattedData() + ']');
+            let history = this.messageHistory[i];
+
+            console.log('user name: ' + '[' + history.user.userName + '] ' + '\nconnection: ' + this.checkConnecting(history.user) + '\nmessage: ' + history.messageText + '\ntime: ' + '[' + this.formattedData() + ']');
         }
         return this.messageHistory
     }
