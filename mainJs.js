@@ -153,7 +153,7 @@ chat1.sendMessage(user4, 'hi4');
 chat1.sendMessage(user1, 'hello5');
 chat1.sendMessage(user2, 'hi6');
 chat1.sendMessage(user1, 'hello7');
-chat1.sendMessage(user2, 'hi8');
+// chat1.sendMessage(user2, 'hi8');
 // chat1.sendMessage(user1, 'hello9');
 // chat1.sendMessage(user2, 'hi10');
 //user1.leaveChat(chat1);
