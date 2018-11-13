@@ -52,7 +52,6 @@ Chat.prototype = {
                 return 'online'
             }
         }
-        return 'offline'
     },
     showMessageHistory: function (index, count) {
         let historyIndex = index;
@@ -145,7 +144,7 @@ let user2 = new User('Andrew');
 let user3 = new User('Olly');
 let user4 = new User('Bogdan');
 
-chat1.addUser(user1, user2, user3, user4);
+chat1.addUser(user2, user3, user4);
 chat1.sendMessage(user1, 'hello1');
 chat1.sendMessage(user2, 'hi2');
 chat1.sendMessage(user3, 'hello3');
@@ -159,9 +158,9 @@ chat1.sendMessage(user1, 'hello7');
 //user1.leaveChat(chat1);
 // chat1.sendMessage(user1, 'hello11');
 // chat1.sendMessage(user2, 'hi12');
-chat1.showMessageHistory();
+//chat1.showMessageHistory();
 //chat1.showMessageHistory(2,4);
-//console.log(chat1);
+console.log(chat1);
 
 // chat2.addUser(user3, user1);
 // chat2.sendMessage(user3, 'sup');
