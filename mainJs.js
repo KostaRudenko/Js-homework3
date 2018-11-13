@@ -152,15 +152,16 @@ chat1.sendMessage(user1, 'hello1');
 chat1.sendMessage(user2, 'hi2');
 chat1.sendMessage(user3, 'hello3');
 chat1.sendMessage(user4, 'hi4');
-// chat1.sendMessage(user1, 'hello5');
+chat1.sendMessage(user1, 'hello5');
 // chat1.sendMessage(user2, 'hi6');
 // chat1.sendMessage(user1, 'hello7');
 // chat1.sendMessage(user2, 'hi8');
 // chat1.sendMessage(user1, 'hello9');
 // chat1.sendMessage(user2, 'hi10');
-user1.leaveChat(chat1);
-chat1.sendMessage(user1, 'hello11');
-chat1.sendMessage(user2, 'hi12');
+//user1.leaveChat(chat1);
+// chat1.sendMessage(user1, 'hello11');
+// chat1.sendMessage(user2, 'hi12');
+
 chat1.showMessageHistory();
 //chat1.showMessageHistory(2,4);
 
