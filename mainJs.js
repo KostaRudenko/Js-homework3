@@ -78,6 +78,9 @@ Chat.prototype = {
         return this.messageHistory
         // если показать все сообщения а их меньше 10 или попросить показать больше сообщений чем их есть, то появляеться строка history is undefined и дальше код не выполняется
         // date показывает текущее время и дату а не когда было создано сообщение
+    },
+    unreadMessage: function (user, amount) {
+
     }
 };
 
@@ -89,7 +92,11 @@ function ChatMessage(user, messageText) {
     this.messageText = messageText;
 }
 
-ChatMessage.prototype = {};
+ChatMessage.prototype = {
+    readUserMessage: function (user) {
+
+    }
+};
 
 function User(userName) {
     if (!userName) {
@@ -130,7 +137,7 @@ User.prototype = {
             chat.sendMessage(this, message)
         }
     },
-    readNewMessage: function (chat, amount) {
+    readUnreadMessage: function (chat, amount) {
 
     }
 };
