@@ -12,6 +12,7 @@ function Chat(chatName) {
     this.users = [];
     this.messageHistory = [];
     this.chats = [];
+
     Chat.chats.push(this);
 }
 
@@ -20,7 +21,7 @@ Chat.prototype = {
         this.date = new Date();
         let localTime = this.date.toLocaleTimeString();
         let milliseconds = this.date.getMilliseconds();
-        return localTime + ':' + milliseconds;
+        return localTime + ':' + milliseconds
     },
     addUser: function () {
         for (let i = 0; i < arguments.length; i++) {
@@ -34,7 +35,7 @@ Chat.prototype = {
 
             for (let j = 0; j < this.users.length; j++) {
                 if (this.users[j] === user) {
-                    this.users.splice(j, 1);
+                    this.users.splice(j, 1)
                 }
             }
         }
@@ -55,13 +56,14 @@ Chat.prototype = {
         //  else return 'offline' или просто  return 'offline', сетит некоторых онлайн пользователей как оффлайн
         // а так undefined
     },
-    showMessageHistory: function (index, count) {
+    showMessageHistory: function (index, amount) {
         let historyIndex = index;
-        let historyCount = count;
+        let historyCount = amount;
 
         if (arguments.length === 2) {
             historyIndex = arguments[0];
             historyCount = arguments[1] + 2;
+
         } else if (arguments.length === 1) {
             historyIndex = 0;
             historyCount = arguments[0];
@@ -71,50 +73,52 @@ Chat.prototype = {
         }
         for (let i = historyIndex; i < historyCount; i++) {
             let history = this.messageHistory[i];
-
             console.log('user name: ' + '[' + history.user.userName + '] ' + '\nconnection: ' + this.checkConnecting(history.user) + '\nmessage: ' + history.messageText + '\ntime: ' + '[' + this.formattedData() + ']');
         }
         return this.messageHistory
-        // если показать все сообщения а их меньше 10 то появляеться строка history is undefined и дальше код не выполняется
+        // если показать все сообщения а их меньше 10 или попросить показать больше сообщений чем их есть, то появляеться строка history is undefined и дальше код не выполняется
         // date показывает текущее время и дату а не когда было создано сообщение
     }
 };
 
 function ChatMessage(user, messageText) {
     if (!user || !messageText) {
-        throw new Error('user or message missing');
+        throw new Error('user or message missing')
     }
     this.user = user;
     this.messageText = messageText;
 }
 
+ChatMessage.prototype = {};
+
 function User(userName) {
     if (!userName) {
-        throw new Error('Enter your name');
+        throw new Error('Enter your name')
     }
     this.userName = userName;
+
     User.users.push(this);
 }
 
 User.prototype = {
     joinDefaultChat: function () {
-        Chat.chats[0].addUser(this);
+        Chat.chats[0].addUser(this)
     },
     leftDefaultChat: function () {
-        Chat.chats[0].removeUser(this);
+        Chat.chats[0].removeUser(this)
     },
     joinChat: function (chat) {
         if (!chat) {
-            this.joinDefaultChat();
+            this.joinDefaultChat()
         } else {
-            chat.addUser(this);
+            chat.addUser(this)
         }
     },
     leaveChat: function (chat) {
         if (!chat) {
-            this.leftDefaultChat();
+            this.leftDefaultChat()
         } else {
-            chat.removeUser(this);
+            chat.removeUser(this)
         }
     },
     sendNewMessage: function (chat, message) {
@@ -123,14 +127,17 @@ User.prototype = {
             message = new ChatMessage(this, message);
             defaultChat.messageHistory.push(message);
         } else {
-            chat.sendMessage(this, message);
+            chat.sendMessage(this, message)
         }
+    },
+    readNewMessage: function (chat, amount) {
+
     }
 };
 
 function globalScopeCheck(propName, value) {
     if (window.hasOwnProperty(propName)) {
-        throw new Error(propName + ' Already exist');
+        throw new Error(propName + ' constructor already exist')
     }
     Object.defineProperty(window, propName, {
         value: value,
@@ -159,26 +166,27 @@ chat1.sendMessage(user1, 'hello7');
 chat1.sendMessage(user2, 'hi8');
 chat1.sendMessage(user1, 'hello9');
 chat1.sendMessage(user2, 'hi10');
-//user1.leaveChat(chat1);
+user1.leaveChat(chat1);
 // chat1.sendMessage(user1, 'hello11');
 // chat1.sendMessage(user2, 'hi12');
-
-chat1.showMessageHistory();
+//chat1.showMessageHistory();
+chat1.showMessageHistory(4);
 //chat1.showMessageHistory(2,4);
 
-//console.error(chat1.checkConnecting(user1));
+// console.error(chat1.checkConnecting(user1));
 console.log(chat1);
-//console.error(chat1.checkConnecting(user1));
+// console.error(chat1.checkConnecting(user1));
 
-// chat2.addUser(user3, user1);
-// chat2.sendMessage(user3, 'sup');
-// chat2.sendMessage(user1, 'hi olly');
-// chat2.sendMessage(user1, 'how are you?');
-// chat2.sendMessage(user3, 'fine..thanks and u?');
-// chat2.sendMessage(user1, 'i`m ok ty');
-// chat2.showMessageHistory(2);
-// chat2.removeUser(user1);
-// console.log(chat2);
+chat2.addUser(user3, user1);
+chat2.sendMessage(user3, 'sup');
+chat2.sendMessage(user1, 'hi olly');
+chat2.sendMessage(user1, 'how are you?');
+chat2.sendMessage(user3, 'fine..thanks and u?');
+chat2.sendMessage(user1, 'i`m ok ty');
+chat2.showMessageHistory(2);
+chat2.removeUser(user1);
+console.log(chat2);
+
 
 // user1.joinChat();
 // user2.joinChat();
