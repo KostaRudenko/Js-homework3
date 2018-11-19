@@ -12,6 +12,7 @@ function Chat(chatName) {
     this.users = [];
     this.messageHistory = [];
     this.chats = [];
+    this.unreadMessage = [];
 
     Chat.chats.push(this);
 }
@@ -49,12 +50,11 @@ Chat.prototype = {
     },
     checkConnecting: function (user) {
         for (let i = 0; i < this.users.length; i++) {
-            if (this.users[i] === user) {
+            if (this.users[i] === user)  {
                 return 'online'
             }
         }
-        //  else return 'offline' или просто  return 'offline', сетит некоторых онлайн пользователей как оффлайн
-        // а так undefined
+        return 'offline'
     },
     showMessageHistory: function (index, amount) {
         let historyIndex = index;
@@ -79,7 +79,7 @@ Chat.prototype = {
         // если показать все сообщения а их меньше 10 или попросить показать больше сообщений чем их есть, то появляеться строка history is undefined и дальше код не выполняется
         // date показывает текущее время и дату а не когда было создано сообщение
     },
-    unreadMessage: function (user, amount) {
+    unReadMessage: function (user, amount) {
 
     }
 };
@@ -90,6 +90,7 @@ function ChatMessage(user, messageText) {
     }
     this.user = user;
     this.messageText = messageText;
+    this.userRead = [];
 }
 
 ChatMessage.prototype = {
@@ -174,25 +175,24 @@ chat1.sendMessage(user2, 'hi8');
 chat1.sendMessage(user1, 'hello9');
 chat1.sendMessage(user2, 'hi10');
 user1.leaveChat(chat1);
-// chat1.sendMessage(user1, 'hello11');
-// chat1.sendMessage(user2, 'hi12');
-//chat1.showMessageHistory();
-chat1.showMessageHistory(4);
+chat1.sendMessage(user1, 'hello11');
+chat1.sendMessage(user2, 'hi12');
+chat1.showMessageHistory(5);
 //chat1.showMessageHistory(2,4);
 
 // console.error(chat1.checkConnecting(user1));
 console.log(chat1);
 // console.error(chat1.checkConnecting(user1));
 
-chat2.addUser(user3, user1);
-chat2.sendMessage(user3, 'sup');
-chat2.sendMessage(user1, 'hi olly');
-chat2.sendMessage(user1, 'how are you?');
-chat2.sendMessage(user3, 'fine..thanks and u?');
-chat2.sendMessage(user1, 'i`m ok ty');
-chat2.showMessageHistory(2);
-chat2.removeUser(user1);
-console.log(chat2);
+// chat2.addUser(user3, user1);
+// chat2.sendMessage(user3, 'sup');
+// chat2.sendMessage(user1, 'hi olly');
+// chat2.sendMessage(user1, 'how are you?');
+// chat2.sendMessage(user3, 'fine..thanks and u?');
+// chat2.sendMessage(user1, 'i`m ok ty');
+// chat2.removeUser(user1);
+// chat2.showMessageHistory(2);
+// console.log(chat2);
 
 
 // user1.joinChat();
