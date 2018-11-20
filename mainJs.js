@@ -176,7 +176,7 @@ chat1.showMessageHistory(4);
 //chat1.showMessageHistory(2,4);
 
 // console.error(chat1.checkConnecting(user1));
-console.log(chat1);
+// console.log(chat1);
 // console.error(chat1.checkConnecting(user1));
 // chat2.addUser(user3, user1);
 // chat2.sendMessage(user3, 'sup');
@@ -187,18 +187,14 @@ console.log(chat1);
 // chat2.removeUser(user1);
 // chat2.showMessageHistory(2);
 // console.log(chat2);
-
-
 // user1.joinChat();
 // user2.joinChat();
-// user2.leaveChat();
 // console.log(defaultChat);
-//
 // chat3.addUser(user3, user4, user1);
 // chat3.sendMessage(user3, 'bobo');
 // user3.sendNewMessage(chat3, 'baba');
 // console.log(chat3);
-// user3.sendNewMessage('atatat');
+// user3.sendNewMessage('atata');
 // user1.sendNewMessage('sho tut');
 
 
