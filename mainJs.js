@@ -1,5 +1,7 @@
 'use strict';
 //globalScopeCheck('Chat', Chat);
+//globalScopeCheck('ChatMessage', ChatMessage);
+//globalScopeCheck('User', User);
 
 User.users = [];
 Chat.chats = [];
@@ -50,34 +52,30 @@ Chat.prototype = {
     },
     checkConnecting: function (user) {
         for (let i = 0; i < this.users.length; i++) {
-            if (this.users[i] === user)  {
+            if (this.users[i] === user) {
                 return 'online'
             }
         }
         return 'offline'
     },
     showMessageHistory: function (index, amount) {
-        let historyIndex = index;
-        let historyCount = amount;
-
         if (arguments.length === 2) {
-            historyIndex = arguments[0];
-            historyCount = arguments[1] + 2;
-
+            index = arguments[0];
+            amount = arguments[1] + 2;
         } else if (arguments.length === 1) {
-            historyIndex = 0;
-            historyCount = arguments[0];
+            index = 0;
+            amount = arguments[0];
         } else {
-            historyIndex = 0;
-            historyCount = 10;
+            index = 0;
+            amount = 10;
         }
-        for (let i = historyIndex; i < historyCount; i++) {
+        for (let i = index; i < amount; i++) {
             let history = this.messageHistory[i];
-            console.log('user name: ' + '[' + history.user.userName + '] ' + '\nconnection: ' + this.checkConnecting(history.user) + '\nmessage: ' + history.messageText + '\ntime: ' + '[' + this.formattedData() + ']');
+            if (this.messageHistory > history) {
+                console.log(`[${history.user.userName}] {${this.checkConnecting(history.user)}} [${this.formattedData()}] :${history.messageText}`)
+            }
         }
         return this.messageHistory
-        // если показать все сообщения а их меньше 10 или попросить показать больше сообщений чем их есть, то появляеться строка history is undefined и дальше код не выполняется
-        // date показывает текущее время и дату а не когда было создано сообщение
     },
     unReadMessage: function (user, amount) {
 
@@ -93,11 +91,7 @@ function ChatMessage(user, messageText) {
     this.userRead = [];
 }
 
-ChatMessage.prototype = {
-    readUserMessage: function (user) {
-
-    }
-};
+ChatMessage.prototype = {};
 
 function User(userName) {
     if (!userName) {
@@ -150,7 +144,7 @@ function globalScopeCheck(propName, value) {
     Object.defineProperty(window, propName, {
         value: value,
         writable: false
-    });
+    })
 }
 
 let defaultChat = new Chat('default');
@@ -170,20 +164,20 @@ chat1.sendMessage(user3, 'hello3');
 chat1.sendMessage(user4, 'hi4');
 chat1.sendMessage(user1, 'hello5');
 chat1.sendMessage(user2, 'hi6');
-chat1.sendMessage(user1, 'hello7');
-chat1.sendMessage(user2, 'hi8');
+chat1.sendMessage(user3, 'hello7');
+chat1.sendMessage(user4, 'hi8');
 chat1.sendMessage(user1, 'hello9');
 chat1.sendMessage(user2, 'hi10');
 user1.leaveChat(chat1);
-chat1.sendMessage(user1, 'hello11');
-chat1.sendMessage(user2, 'hi12');
-chat1.showMessageHistory(5);
+//chat1.sendMessage(user3, 'hello11');
+//chat1.sendMessage(user4, 'hi12');
+chat1.showMessageHistory(4);
+//chat1.showMessageHistory();
 //chat1.showMessageHistory(2,4);
 
 // console.error(chat1.checkConnecting(user1));
 console.log(chat1);
 // console.error(chat1.checkConnecting(user1));
-
 // chat2.addUser(user3, user1);
 // chat2.sendMessage(user3, 'sup');
 // chat2.sendMessage(user1, 'hi olly');
