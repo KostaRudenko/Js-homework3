@@ -15,7 +15,6 @@ function Chat(chatName) {
     this.messageHistory = [];
     this.chats = [];
     this.unreadMessage = [];
-
     Chat.chats.push(this);
 }
 
@@ -35,7 +34,6 @@ Chat.prototype = {
     removeUser: function () {
         for (let i = 0; i < arguments.length; i++) {
             let user = arguments[i];
-
             for (let j = 0; j < this.users.length; j++) {
                 if (this.users[j] === user) {
                     this.users.splice(j, 1)
@@ -98,7 +96,6 @@ function User(userName) {
         throw new Error('Enter your name')
     }
     this.userName = userName;
-
     User.users.push(this);
 }
 
