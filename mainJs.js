@@ -76,7 +76,13 @@ Chat.prototype = {
         return this.messageHistory
     },
     unReadMessage: function (user, amount) {
-
+        for (let i = 0; i < this.messageHistory.length; i++){
+            this.unreadMessage = this.messageHistory[i];
+            if (this.unreadMessage.user === user) {
+                let unread = this.unreadMessage;
+                //console.error(unread);
+            }
+        }
     }
 };
 
@@ -86,10 +92,10 @@ function ChatMessage(user, messageText) {
     }
     this.user = user;
     this.messageText = messageText;
-    this.userRead = [];
+    //this.userRead = [];
 }
 
-ChatMessage.prototype = {};
+//ChatMessage.prototype = {};
 
 function User(userName) {
     if (!userName) {
@@ -129,9 +135,7 @@ User.prototype = {
             chat.sendMessage(this, message)
         }
     },
-    readUnreadMessage: function (chat, amount) {
-
-    }
+    //readUnreadMessage: function (chat, amount) {}
 };
 
 function globalScopeCheck(propName, value) {
@@ -166,33 +170,11 @@ chat1.sendMessage(user4, 'hi8');
 chat1.sendMessage(user1, 'hello9');
 chat1.sendMessage(user2, 'hi10');
 user1.leaveChat(chat1);
-//chat1.sendMessage(user3, 'hello11');
-//chat1.sendMessage(user4, 'hi12');
+chat1.sendMessage(user3, 'hello11');
+chat1.sendMessage(user4, 'hi12');
 chat1.showMessageHistory(4);
-//chat1.showMessageHistory();
-//chat1.showMessageHistory(2,4);
 
-// console.error(chat1.checkConnecting(user1));
-// console.log(chat1);
-// console.error(chat1.checkConnecting(user1));
-// chat2.addUser(user3, user1);
-// chat2.sendMessage(user3, 'sup');
-// chat2.sendMessage(user1, 'hi olly');
-// chat2.sendMessage(user1, 'how are you?');
-// chat2.sendMessage(user3, 'fine..thanks and u?');
-// chat2.sendMessage(user1, 'i`m ok ty');
-// chat2.removeUser(user1);
-// chat2.showMessageHistory(2);
-// console.log(chat2);
-// user1.joinChat();
-// user2.joinChat();
-// console.log(defaultChat);
-// chat3.addUser(user3, user4, user1);
-// chat3.sendMessage(user3, 'bobo');
-// user3.sendNewMessage(chat3, 'baba');
-// console.log(chat3);
-// user3.sendNewMessage('atata');
-// user1.sendNewMessage('sho tut');
+chat1.unReadMessage(user1);
 
 
 
